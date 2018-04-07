@@ -120,7 +120,7 @@ class BallotNew extends React.Component {
       return (
         <Message color='teal'>
           <Message.Header>The ballot is successfully created!</Message.Header>
-          <p>The contract address is {createdBallotAddress}</p>
+          <p>The contract address is {createdBallotAddress} at index {createdBallotIndex}</p>
         </Message>
       )
     }
