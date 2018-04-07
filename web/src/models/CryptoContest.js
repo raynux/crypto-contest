@@ -8,7 +8,6 @@ class CryptoContest {
   }
 
   async balanceOf(addr) {
-    console.log()
     return (await this.artifact.balanceOf.call(addr)).toNumber()
   }
 
@@ -36,3 +35,4 @@ class CryptoContest {
 }
 
 module.exports = CryptoContest
+// export default CryptoContest

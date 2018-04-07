@@ -1,0 +1,1 @@
+export const SET_CRYPTO_CONTEST = 'SET_CRYPTO_CONTEST'
