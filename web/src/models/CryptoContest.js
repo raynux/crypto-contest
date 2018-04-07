@@ -34,5 +34,4 @@ class CryptoContest {
   }
 }
 
-module.exports = CryptoContest
-// export default CryptoContest
+export default CryptoContest

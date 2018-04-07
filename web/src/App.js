@@ -13,8 +13,7 @@ import {
 import './App.css'
 
 import Dashboard from './components/Dashboard'
-
-const CryptoContest = require('./models/CryptoContest')
+import CryptoContest from './models/CryptoContest'
 
 const routes = (
   <Switch>

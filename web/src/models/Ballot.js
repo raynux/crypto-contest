@@ -57,4 +57,4 @@ class Ballot {
 Ballot.STATE_OPEN = STATE_OPEN
 Ballot.STATE_CLOSED = STATE_CLOSED
 
-module.exports = Ballot
+export default Ballot

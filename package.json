@@ -3,5 +3,9 @@
     "lodash": "^4.17.5",
     "moment": "^2.22.0",
     "zeppelin-solidity": "^1.8.0"
+  },
+  "scripts": {
+    "esm2cjs": "sh esm2cjs.sh",
+    "test": "yarn esm2cjs && truffle test"
   }
 }

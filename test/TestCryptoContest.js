@@ -4,8 +4,10 @@ const moment = require('moment')
 const CryptoContestContract = artifacts.require('./CryptoContest.sol')
 const BallotContract = artifacts.require('./Ballot.sol')
 
-const CryptoContest = require('../web/src/models/CryptoContest')
-const Ballot = require('../web/src/models/Ballot')
+// const CryptoContest = require('../web/src/models/CryptoContest')
+// const Ballot = require('../web/src/models/Ballot')
+const CryptoContest = require('../build/cjs/CryptoContest')
+const Ballot = require('../build/cjs/Ballot')
 
 contract('CryptoContest', (accounts) => {
   it('creates a ballot', async () => {
