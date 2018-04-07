@@ -7,7 +7,8 @@ import {
   Container,
   Statistic,
   Label,
-  Divider
+  Divider,
+  Tab
 } from 'semantic-ui-react'
 
 import BallotNew from './BallotNew'
@@ -23,6 +24,27 @@ class Dashboard extends React.Component {
     const {web3, accountStatus} = this.props
     const {balance, totalSupply, ballotCount} = accountStatus
 
+    const panes = [
+      {
+        menuItem: 'Ballots',
+        render: () => (
+          <div>
+            <Divider hidden />
+            Ballots
+          </div>
+        )
+      },
+      {
+        menuItem: 'New',
+        render: () => (
+          <div>
+            <Divider hidden />
+            <BallotNew />
+          </div>
+        )
+      }
+    ]
+
     return (
       <Container>
         <div>
@@ -34,9 +56,9 @@ class Dashboard extends React.Component {
           <Statistic label='Ballots' value={numeral(ballotCount).format('0,0')} />
         </Statistic.Group>
 
-        <Divider />
+        <Divider hidden />
 
-        <BallotNew />
+        <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
       </Container>
     )
   }

@@ -4,7 +4,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 import {
-  Header,
   Form,
   Loader,
   Dimmer,
@@ -138,7 +137,6 @@ class BallotNew extends React.Component {
           <Loader size='large' content='Confirm on METAMASK' />
         </Dimmer>
 
-        <Header>New Ballot</Header>
         {this.messageBox()}
         <Form>
           <Form.Group widths='3'>
