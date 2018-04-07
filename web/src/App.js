@@ -7,7 +7,8 @@ import {
 import { connect } from 'react-redux'
 import contract from 'truffle-contract'
 import {
-  setCryptoContest
+  setCryptoContest,
+  setAccountStatus
 } from './actions'
 
 import './App.css'
@@ -33,7 +34,16 @@ class App extends Component {
     CryptoContestContract.setProvider(web3.currentProvider)
 
     const instance = await CryptoContestContract.deployed()
-    dispatch(setCryptoContest(new CryptoContest(instance)))
+    const cryptoContest = new CryptoContest(instance)
+    dispatch(setCryptoContest(cryptoContest))
+
+    // Fetch current account status
+    const [balance, totalSupply, ballotCount] = await Promise.all([
+      await cryptoContest.balanceOf(web3.eth.coinbase),
+      await cryptoContest.totalSupply(),
+      await cryptoContest.ballotCount()
+    ])
+    dispatch(setAccountStatus({balance, totalSupply, ballotCount}))
   }
 
   render() {

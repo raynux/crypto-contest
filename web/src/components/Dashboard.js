@@ -12,30 +12,17 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      balance: 0,
-      totalSupply: 0,
-      ballotCount: 0,
-    }
+    this.state = {}
   }
 
   async componentWillReceiveProps(nextProps) {
-    const {web3, cryptoContest} = nextProps
-
+    // const {web3, cryptoContest} = nextProps
     // await cryptoContest.mint({to: web3.eth.coinbase, amount: 666})
-
-    const [balance, totalSupply, ballotCount] = await Promise.all([
-      await cryptoContest.balanceOf(web3.eth.coinbase),
-      await cryptoContest.totalSupply(),
-      await cryptoContest.ballotCount()
-    ])
-
-    this.setState({balance, totalSupply, ballotCount})
   }
 
   render() {
-    const {web3} = this.props
-    const {balance, totalSupply, ballotCount} = this.state
+    const {web3, accountStatus} = this.props
+    const {balance, totalSupply, ballotCount} = accountStatus
 
     return (
       <Container>
@@ -52,6 +39,7 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = state => ({
   web3: state.web3,
-  cryptoContest: state.cryptoContest
+  cryptoContest: state.cryptoContest,
+  accountStatus: state.accountStatus
 })
 export default connect(mapStateToProps)(Dashboard)

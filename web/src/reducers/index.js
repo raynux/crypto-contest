@@ -6,7 +6,11 @@ import {
 const initState = {
   web3: null,
   cryptoContest: null,
-  accountStatus: null
+  accountStatus: {
+    balance: 0,
+    totalSupply: 0,
+    ballotCount: 0
+  }
 }
 
 if(typeof web3 !== 'undefined') {
