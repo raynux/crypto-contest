@@ -13,7 +13,6 @@ contract('CryptoContest', (accounts) => {
   it('creates a ballot', async () => {
     const cryptoContest = new CryptoContest(await CryptoContestContract.new())
 
-    // properties for the new ballot
     const ballotParams = {
       title: 'NEW BALLOT TITLE',
       description: 'NEW BALLOT DESCRIPTION',
@@ -24,7 +23,7 @@ contract('CryptoContest', (accounts) => {
     assert.equal(await cryptoContest.ballotCount(), 0)
 
     const {address} = await cryptoContest.createBallot(ballotParams)
-    const ballot = new Ballot(await BallotContract.at(address))
+    const ballot = new Ballot(await BallotContract.at(address), web3)
 
     assert.equal(await cryptoContest.ballotCount(), 1)
 
@@ -111,7 +110,7 @@ contract('CryptoContest', (accounts) => {
     }
 
     const {index, address} = await cryptoContest.createBallot(ballotParams)
-    const ballot = new Ballot(await BallotContract.at(address))
+    const ballot = new Ballot(await BallotContract.at(address), web3)
 
     assert.equal(await ballot.voteCount(), 0)
 
@@ -141,7 +140,6 @@ contract('CryptoContest', (accounts) => {
       amount: DEFAULT_BALANCE
     })
 
-    // properties for the new ballot
     const ballotParams = {
       title: 'NEW BALLOT TITLE',
       description: 'NEW BALLOT DESCRIPTION',
@@ -150,7 +148,7 @@ contract('CryptoContest', (accounts) => {
     }
 
     const {index, address} = await cryptoContest.createBallot(ballotParams)
-    const ballot = new Ballot(await BallotContract.at(address))
+    const ballot = new Ballot(await BallotContract.at(address), web3)
 
     await cryptoContest.vote({
       ballotIndex: index,
@@ -184,7 +182,6 @@ contract('CryptoContest', (accounts) => {
       amount: DEFAULT_BALANCE
     })
 
-    // properties for the new ballot
     const ballotParams = {
       title: 'NEW BALLOT TITLE',
       description: 'NEW BALLOT DESCRIPTION',
@@ -193,7 +190,7 @@ contract('CryptoContest', (accounts) => {
     }
 
     const {index, address} = await cryptoContest.createBallot(ballotParams)
-    const ballot = new Ballot(await BallotContract.at(address))
+    const ballot = new Ballot(await BallotContract.at(address), web3)
 
     let options = await ballot.options()
     assert.equal(options[0].betAmount, 0)

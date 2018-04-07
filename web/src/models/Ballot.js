@@ -1,11 +1,47 @@
+const _ = require('lodash')
 const moment = require('moment')
+const contract = require('truffle-contract')
 
 const STATE_OPEN = 0
 const STATE_CLOSED = 1
 
 class Ballot {
-  constructor(artifact) {
+  static async at(addr, web3) {
+    const BallotContract = contract(require('../contracts/Ballot.json'))
+    BallotContract.defaults({from: web3.eth.coinbase})
+    BallotContract.setProvider(web3.currentProvider)
+
+    const instance = await BallotContract.at(addr)
+    return new this(instance, web3)
+  }
+
+  constructor(artifact, web3) {
     this.artifact = artifact
+    this.web3 = web3
+  }
+
+  // Retrieve all information about this ballot
+  async info() {
+    const res = await Promise.all([
+      this.title(),
+      this.description(),
+      this.voteCount(),
+      this.startedAt(),
+      this.state(),
+      this.options()
+    ])
+
+    const keys = [
+      'title', 'description', 'voteCount',
+      'startedAt', 'state', 'options'
+    ]
+
+    return _.transform(res, (res, v, i) => {
+      Object.assign(res, {
+        [keys[i]]: v
+      })
+      return res
+    }, {address: this.artifact.address})
   }
 
   async title() {
@@ -38,6 +74,7 @@ class Ballot {
   }
 
   async options() {
+    const {web3} = this
     const count = (await this.artifact.optionCount.call()).toNumber()
     const options = []
 

@@ -11,6 +11,7 @@ import {
   Tab
 } from 'semantic-ui-react'
 
+import BallotList from './BallotList'
 import BallotNew from './BallotNew'
 
 class Dashboard extends React.Component {
@@ -30,7 +31,7 @@ class Dashboard extends React.Component {
         render: () => (
           <div>
             <Divider hidden />
-            Ballots
+            <BallotList />
           </div>
         )
       },
