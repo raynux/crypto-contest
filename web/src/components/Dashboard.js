@@ -2,6 +2,11 @@ import React from 'react'
 // import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 
+import {
+  Container,
+  Input
+} from 'semantic-ui-react'
+
 class Dashboard extends React.Component {
   // constructor(props) {
   //   super(props)
@@ -11,7 +16,11 @@ class Dashboard extends React.Component {
   // }
 
   render() {
-    return <span>hello</span>
+    return (
+      <Container>
+        hi
+      </Container>
+    )
   }
 }
 
