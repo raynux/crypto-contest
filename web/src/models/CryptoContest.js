@@ -29,6 +29,10 @@ class CryptoContest {
     return await this.artifact.ballots.call(index)
   }
 
+  async ballotCount() {
+    return (await this.artifact.ballotCount.call()).toNumber()
+  }
+
   async vote({ballotIndex, optionIndex, bet}) {
     await this.artifact.vote(ballotIndex, optionIndex, bet)
   }

@@ -29,6 +29,7 @@ class App extends Component {
     // Setup Contracts
     const {web3} = this.props
     const CryptoContestContract = contract(require('./contracts/CryptoContest.json'))
+    CryptoContestContract.defaults({from: web3.eth.coinbase})
     CryptoContestContract.setProvider(web3.currentProvider)
 
     const instance = await CryptoContestContract.deployed()

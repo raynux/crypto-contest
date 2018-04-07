@@ -30,4 +30,8 @@ contract CryptoContest is MintableToken {
     balances[msg.sender] = balances[msg.sender].sub(_betAmount);
     ballots[_ballotIndex].vote(msg.sender, _optionIndex, _betAmount);
   }
+
+  function ballotCount() view public returns (uint256) {
+    return ballots.length;
+  }
 }

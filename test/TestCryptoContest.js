@@ -21,8 +21,12 @@ contract('CryptoContest', (accounts) => {
       optionImageUrls: ['exmaple.com/1', 'exmaple.com/2', 'exmaple.com/3']
     }
 
+    assert.equal(await cryptoContest.ballotCount(), 0)
+
     const {address} = await cryptoContest.createBallot(ballotParams)
     const ballot = new Ballot(await BallotContract.at(address))
+
+    assert.equal(await cryptoContest.ballotCount(), 1)
 
     assert.equal(
       await ballot.title(),
