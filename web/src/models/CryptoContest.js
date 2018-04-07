@@ -1,4 +1,15 @@
+const contract = require('truffle-contract')
+
 class CryptoContest {
+  static async deployed(web3) {
+    const CryptoContestContract = contract(require('../contracts/CryptoContest.json'))
+    CryptoContestContract.defaults({from: web3.eth.coinbase})
+    CryptoContestContract.setProvider(web3.currentProvider)
+
+    const instance = await CryptoContestContract.deployed()
+    return new this(instance)
+  }
+  
   constructor(artifact) {
     this.artifact = artifact
   }

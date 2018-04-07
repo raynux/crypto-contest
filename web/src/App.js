@@ -5,7 +5,6 @@ import {
   withRouter
 } from 'react-router-dom'
 import { connect } from 'react-redux'
-import contract from 'truffle-contract'
 import {
   setCryptoContest,
   setAccountStatus
@@ -29,12 +28,7 @@ class App extends Component {
 
     // Setup Contracts
     const {web3} = this.props
-    const CryptoContestContract = contract(require('./contracts/CryptoContest.json'))
-    CryptoContestContract.defaults({from: web3.eth.coinbase})
-    CryptoContestContract.setProvider(web3.currentProvider)
-
-    const instance = await CryptoContestContract.deployed()
-    const cryptoContest = new CryptoContest(instance)
+    const cryptoContest = await CryptoContest.deployed(web3)
     dispatch(setCryptoContest(cryptoContest))
 
     // Fetch current account status
