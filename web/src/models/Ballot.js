@@ -37,9 +37,7 @@ class Ballot {
     ]
 
     return _.transform(res, (res, v, i) => {
-      Object.assign(res, {
-        [keys[i]]: v
-      })
+      res[keys[i]] = v
       return res
     }, {address: this.artifact.address})
   }

@@ -161,6 +161,6 @@ class BallotNew extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  cryptoContest: state.cryptoContest
+  // cryptoContest: state.cryptoContest
 })
 export default connect(mapStateToProps)(BallotNew)

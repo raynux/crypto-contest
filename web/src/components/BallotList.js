@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import React from 'react'
-// import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 import {
@@ -53,6 +53,10 @@ class BallotList extends React.Component {
       ballotInfoTasks.push(b.info())
     }
     const ballotsInfo = _(await Promise.all(ballotInfoTasks))
+      .map((bi, i) => {
+        bi.index = i
+        return bi
+      })
       .sortBy('startedAt')
       .reverse()
       .value()
@@ -65,7 +69,9 @@ class BallotList extends React.Component {
 
     return _.map(ballotsInfo, (bi) => (
       <Table.Row key={bi.address}>
-        <Table.Cell>{bi.title}</Table.Cell>
+        <Table.Cell>
+          <Link to={`/ballots/${bi.index}`}>{bi.title}</Link>
+        </Table.Cell>
         <Table.Cell>{bi.description}</Table.Cell>
         <Table.Cell>{bi.voteCount}</Table.Cell>
         <Table.Cell>{bi.options.length}</Table.Cell>

@@ -12,13 +12,22 @@ import {
 
 import './App.css'
 
-import Dashboard from './components/Dashboard'
+import { Container } from 'semantic-ui-react'
+
+import GlobalHeader from './components/GlobalHeader'
+// import Dashboard from './components/Dashboard'
+import BallotList from './components/BallotList'
+import BallotView from './components/BallotView'
+import BallotNew from './components/BallotNew'
+
 import CryptoContest from './models/CryptoContest'
 
 const routes = (
   <Switch>
-    <Route path='/' component={Dashboard} exact />
-    <Route component={Dashboard} />
+    <Route path='/ballots' component={BallotList} exact />
+    <Route path='/ballots/new' component={BallotNew} exact />
+    <Route path='/ballots/:index' component={BallotView} exact />
+    <Route component={BallotList} />
   </Switch>
 )
 
@@ -48,7 +57,8 @@ class App extends Component {
 
     return (
       <div>
-        {routes}
+        <GlobalHeader />
+        <Container>{routes}</Container>
       </div>
     )
   }
