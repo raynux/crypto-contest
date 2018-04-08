@@ -60,7 +60,7 @@ contract Ballot {
     return votes.length;
   }
 
-  function vote(address voter, uint8 _optionIndex, uint256 _bet) public {
+  function vote(address voter, uint8 _optionIndex, uint256 _bet) external {
     options[_optionIndex].betAmount = options[_optionIndex].betAmount.add(_bet);
     votes.push(
       Vote({
