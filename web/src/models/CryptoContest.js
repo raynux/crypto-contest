@@ -45,7 +45,6 @@ class CryptoContest {
   }
 
   async vote({ballotIndex, optionIndex, bet}) {
-    console.log(ballotIndex, optionIndex, bet)
     await this.artifact.vote(ballotIndex, optionIndex, bet)
   }
 }

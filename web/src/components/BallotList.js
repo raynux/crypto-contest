@@ -66,7 +66,6 @@ class BallotList extends React.Component {
 
   tableRows() {
     const {ballotsInfo} = this.state
-    console.log(ballotsInfo)
 
     return _.map(ballotsInfo, (bi) => (
       <Table.Row key={bi.address}>
