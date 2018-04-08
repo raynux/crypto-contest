@@ -36,10 +36,16 @@ class Ballot {
       'startedAt', 'state', 'options'
     ]
 
-    return _.transform(res, (res, v, i) => {
-      res[keys[i]] = v
-      return res
-    }, {address: this.artifact.address})
+    return _(res)
+      .transform((r, v, i) => {
+        r[keys[i]] = v
+        return r
+      }, {address: this.artifact.address})
+      .tap((v) => {
+        v.totalBetAmount = _.sumBy(v.options, 'betAmount')
+        return v
+      })
+      .value()
   }
 
   async title() {

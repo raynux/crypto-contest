@@ -66,6 +66,7 @@ class BallotList extends React.Component {
 
   tableRows() {
     const {ballotsInfo} = this.state
+    console.log(ballotsInfo)
 
     return _.map(ballotsInfo, (bi) => (
       <Table.Row key={bi.address}>
@@ -75,6 +76,7 @@ class BallotList extends React.Component {
         <Table.Cell>{bi.description}</Table.Cell>
         <Table.Cell>{bi.voteCount}</Table.Cell>
         <Table.Cell>{bi.options.length}</Table.Cell>
+        <Table.Cell>{bi.totalBetAmount}</Table.Cell>
         <Table.Cell>{bi.startedAt.format()}</Table.Cell>
       </Table.Row>
     ))
@@ -95,6 +97,7 @@ class BallotList extends React.Component {
               <Table.HeaderCell>Description</Table.HeaderCell>
               <Table.HeaderCell>Votes</Table.HeaderCell>
               <Table.HeaderCell>Options</Table.HeaderCell>
+              <Table.HeaderCell>Bet Total</Table.HeaderCell>
               <Table.HeaderCell>Started</Table.HeaderCell>
             </Table.Row>
 
