@@ -24,14 +24,30 @@ contract CryptoContest is MintableToken {
     BallotCreated(ballots.length - 1, _ballot);
   }
 
-  function vote(uint _ballotIndex, uint8 _optionIndex, uint256 _betAmount) public {
-    require(_betAmount <= balances[msg.sender]);
-
-    balances[msg.sender] = balances[msg.sender].sub(_betAmount);
-    ballots[_ballotIndex].vote(msg.sender, _optionIndex, _betAmount);
-  }
-
   function ballotCount() view public returns (uint256) {
     return ballots.length;
+  }
+
+  function vote(uint256 _ballotIndex, uint8 _optionIndex, uint256 _bet) public {
+    require(0 < _bet);
+    require(_bet <= balances[msg.sender]);
+
+    /*  TODO: this should be "transfer" */
+    balances[msg.sender] = balances[msg.sender].sub(_bet);
+    ballots[_ballotIndex].vote(msg.sender, _optionIndex, _bet);
+  }
+
+  function closeBallot(uint256 _ballotIndex) public {
+    Ballot ballot = ballots[_ballotIndex];
+    uint256 winnerCount = ballot.close();
+
+    /* Reward calculation */
+    for(uint256 i = 0; i < winnerCount; i++) {
+      address _winner = ballot.winners(i);
+      uint256 _reward = ballot.rewards(_winner);
+
+      /*  TODO: this should be "transferFrom"? */
+      balances[_winner] = balances[_winner].add(_reward);
+    }
   }
 }
